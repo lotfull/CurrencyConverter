@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Concurrency converter
 //
-//  Created by Андрей on 20.02.17.
-//  Copyright © 2017 Andrey. All rights reserved.
+//  Created by Andrey Nagaev on 20.02.17.
+//  Copyright © 2017 Andrey Nagaev. All rights reserved.
 //
 
 import UIKit
@@ -14,13 +14,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var pickerFrom: UIPickerView!
     @IBOutlet weak var pickerTo: UIPickerView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var textFieldFrom: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
     
-    let currencies = ["RUB","USD","EUR"]
+    var currencies = ["RUB","USD","EUR"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.label.text = "Здесь будет текст"
+        self.label.text = ""
         
         self.pickerTo.dataSource = self
         self.pickerFrom.dataSource = self
@@ -30,8 +32,34 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         self.activityIndicator.hidesWhenStopped = true
         
-        self.requestCurrentCurrencyRate()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.pickerTo.isHidden = true
+        self.pickerFrom.isHidden = true
+        self.label.isHidden = true
+        
+        //Получаем текущую дату, чтобы проверить актуальность списка валют в NSUserDefaults
+        
+        let date = NSDate()
+        var dateDesc = date.description
+        let index = dateDesc.index(dateDesc.startIndex, offsetBy: 10)
+        dateDesc = dateDesc.substring(to: index)
+        let lastDate = UserDefaults.standard.object(forKey: "lastDate") as? String
+        
+        if(  lastDate != dateDesc)
+        {
+            //Обновляем список, если дата не совпадает
+            self.requestCurrencyRatesList()
+        }
+        else
+        {
+            //Получаем данные из списка и делаем видимыми основные элементы
+            currencies = UserDefaults.standard.array(forKey: "currencies") as! [String]
+            self.activityIndicator.stopAnimating()
+            self.pickerFrom.reloadAllComponents()
+            self.pickerTo.reloadAllComponents()
+            self.pickerTo.isHidden = false
+            self.pickerFrom.isHidden = false
+            self.label.isHidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +67,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Dispose of any resources that can be recreated.
     }
 
+    //Нажата кнопка пересчета
+    @IBAction func buttonPressed(_ sender: Any) {
+        self.requestCurrentCurrencyRate()
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         return 1;
@@ -58,6 +91,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         {
             return self.currenciesExpectBase()[row]
         }
+        
         return currencies[row]
     }
     
@@ -72,17 +106,27 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         dataTask.resume()
     }
     
-    func parseCurrencyRateResponse(data: Data?, toCurrency: String) -> String {
+    func parseCurrencyRateResponse(data: Data?, toCurrency: String, reloadCurrencies: Bool) -> String {
         var value: String = ""
         
         do{
             let json = try JSONSerialization.jsonObject(with: data!, options:[] ) as? Dictionary<String, Any>
             
             if let parsedJSON = json {
-                print("\(parsedJSON)")
                 if let rates = parsedJSON["rates"] as? Dictionary<String, Double>{
                     if let rate = rates[toCurrency]
                     {
+                        //Если передан параметр, обновляем данные в currencies
+                        if(reloadCurrencies)
+                        {
+                            self.currencies = []
+                            for(currencyName, _) in rates{
+                                self.currencies.append(currencyName)
+                            }
+                            
+                            UserDefaults.standard.set(parsedJSON["date"], forKey: "lastDate")
+                        }
+ 
                         value = "\(rate)"
                     }
                     else{
@@ -102,23 +146,31 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return value;
     }
     
-    func retrieveCurrencyRate(baseCurrency: String, toCurrency: String, completion: @escaping(String)->Void){
+    func retrieveCurrencyRate(baseCurrency: String, toCurrency: String, reloadCurrencies: Bool, completion: @escaping(String)->Void){
         self.requestCurrencyRates(baseCurrency: baseCurrency){[weak self] (data, error) in
             var string = "No currency retrieved!"
             
             if let currentError = error
             {
-                string = currentError.localizedDescription
-                let alert = UIAlertController(title: "Ошибка!", message: string, preferredStyle: UIAlertControllerStyle.alert)
-                
-                let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default)
-                alert.addAction(okAction)
-                self!.present(alert, animated: true, completion: nil)
-                string = ""
+                if let strongSelf = self{
+                    //Выводим ошибку, в основной очереди, чтобы пользоваться приложением, надо перезайти в него
+                    DispatchQueue.main.async {
+                    string = currentError.localizedDescription
+                    let alert = UIAlertController(title: "Ошибка!", message: string, preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    strongSelf.present(alert, animated: true, completion: nil)
+                    
+                    //Прячем остальные элементы, для красоты
+                    strongSelf.pickerTo.isHidden = true
+                    strongSelf.pickerFrom.isHidden = true
+                    strongSelf.label.isHidden = true
+                    }
+                }
+                string = "0"
                 
             } else{
                 if let strongSelf = self {
-                    string = strongSelf.parseCurrencyRateResponse(data: data, toCurrency: toCurrency)
+                    string = strongSelf.parseCurrencyRateResponse(data: data, toCurrency: toCurrency, reloadCurrencies: reloadCurrencies)
                 }
             }
             
@@ -132,7 +184,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         {
             self.pickerTo.reloadAllComponents()
         }
-        
         self.requestCurrentCurrencyRate()
     }
     
@@ -153,77 +204,56 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let baseCurrency = self.currencies[baseCurrencyIndex]
         let toCurrency = self.currenciesExpectBase()[toCurrencyIndex]
         
-        self.retrieveCurrencyRate(baseCurrency: baseCurrency, toCurrency: toCurrency){[weak self]
+        self.retrieveCurrencyRate(baseCurrency: baseCurrency, toCurrency: toCurrency, reloadCurrencies: false){[weak self]
             (value) in
             DispatchQueue.main.async {
                 if let strongSelf = self {
-                    strongSelf.label.text = value
+                    //Считаем значение с учетом того, что написано в textField
+                    let val = Double(value)
+                    let mult = Double(strongSelf.textFieldFrom.text!)
+                    
+                    if((mult) != nil)
+                    {
+                        let result =  " " + baseCurrency + " в " + toCurrency
+                        strongSelf.label.text = strongSelf.textFieldFrom.text! + result + " = " + (val!*mult!).description
+                        strongSelf.nameLabel.text = "Основная валюта - " + baseCurrency
+                    }
+                    else
+                    {
+                        strongSelf.label.text = "0"
+                    }
+
                     strongSelf.activityIndicator.stopAnimating()
                 }
             }
-            
         }
-    }
-/*
-    func requestCurrencyList(baseCurrency: String, parseHandler: @escaping (Data?, Error?)->Void){
-        let url = URL(string: "https://api.fixer.io/latest" + baseCurrency);
-        
-        let dataTask = URLSession.shared.dataTask(with: url!){
-            (dataRecieved, response, error) in
-            parseHandler(dataRecieved, error)
-        }
-        
-        dataTask.resume()
     }
     
-    func parseCurrencyRatesListResponse(data: Data?, toCurrency: String) -> [String] {
-        var value:[String] = []
+    //Метод для получения списка валют, чтобы их отобразить при viewDidLoad, если их нет в памяти приложения
+    func requestCurrencyRatesList(){
+        self.activityIndicator.startAnimating()
         
-        do{
-            let json = try JSONSerialization.jsonObject(with: data!, options:[] ) as? Dictionary<String, Any>
-            
-            if let parsedJSON = json {
-                print("\(parsedJSON)")
-                if let rates = parsedJSON["rates"] as? Dictionary<String, Double>{
-                    for(currencyName, _) in rates{
-                        value.append(currencyName)
+        self.retrieveCurrencyRate(baseCurrency: "EUR", toCurrency: "USD", reloadCurrencies: true){[weak self]
+            (value) in
+            DispatchQueue.main.async {
+                if let strongSelf = self {
+                    if(value != "0")
+                    {
+                        //Поскольку запрос latest делается по валюте EUR, то нужно добавить эту валюту
+                        strongSelf.currencies.append("EUR")
+                        UserDefaults.standard.set(strongSelf.currencies, forKey: "currencies")
+                        strongSelf.activityIndicator.stopAnimating()
+                        strongSelf.pickerFrom.reloadAllComponents()
+                        strongSelf.pickerTo.reloadAllComponents()
+                        strongSelf.pickerTo.isHidden = false
+                        strongSelf.pickerFrom.isHidden = false
+                        strongSelf.label.isHidden = false
                     }
                 }
-                else{
-                    value = ["No \"rates\" field found"]
-                }
-            } else{
-                value = ["No JSON value parsed"]
             }
-        } catch {
-            value = [error.localizedDescription]
         }
-        
-        return value;
     }
-    
-    func retrieveCurrencyRatesList(baseCurrency: String, toCurrency: String, completion: @escaping([String])->Void){
-        self.requestCurrencyRates(baseCurrency: baseCurrency){[weak self] (data, error) in
-            var string: [String] = []
-            
-            if let currentError = error
-            {
-                let alert = UIAlertController(title: "Ошибка!", message: currentError.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-                
-                let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default)
-                alert.addAction(okAction)
-                self!.present(alert, animated: true, completion: nil)
 
-            } else{
-                if let strongSelf = self {
-                    string = strongSelf.parseCurrencyRatesListResponse(data: data, toCurrency: toCurrency)
-                }
-            }
-            
-            completion(string)
-        }
-    }
- */
 }
 
 

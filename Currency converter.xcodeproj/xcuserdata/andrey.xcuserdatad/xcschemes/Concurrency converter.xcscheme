@@ -17,7 +17,7 @@
                BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
                BuildableName = "Concurrency converter.app"
                BlueprintName = "Concurrency converter"
-               ReferencedContainer = "container:Concurrency converter.xcodeproj">
+               ReferencedContainer = "container:Currency converter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
             BuildableName = "Concurrency converter.app"
             BlueprintName = "Concurrency converter"
-            ReferencedContainer = "container:Concurrency converter.xcodeproj">
+            ReferencedContainer = "container:Currency converter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
             BuildableName = "Concurrency converter.app"
             BlueprintName = "Concurrency converter"
-            ReferencedContainer = "container:Concurrency converter.xcodeproj">
+            ReferencedContainer = "container:Currency converter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
             BuildableName = "Concurrency converter.app"
             BlueprintName = "Concurrency converter"
-            ReferencedContainer = "container:Concurrency converter.xcodeproj">
+            ReferencedContainer = "container:Currency converter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
