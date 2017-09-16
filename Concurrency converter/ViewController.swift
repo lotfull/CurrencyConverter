@@ -1,27 +1,15 @@
-//
-//  ViewController.swift
-//  Concurrency converter
-//
-//  Created by Andrey Nagaev on 20.02.17.
-//  Copyright © 2017 Andrey Nagaev. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
 extension String {
-    var floatValue: Float {
-        let nf = NumberFormatter()
-        nf.decimalSeparator = "."
-        if let result = nf.number(from: self) {
-            return result.floatValue
+    var DoubleCommaValue: Double {
+        if let dab = Double(self) {
+            return dab
+        } else if let dab = Double(String(self.characters.map { $0 == "," ? "." : $0 })) {
+            return dab
         } else {
-            nf.decimalSeparator = ","
-            if let result = nf.number(from: self) {
-                return result.floatValue
-            }
+            return 0
         }
-        return 0
     }
 }
 
@@ -170,7 +158,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if (pickerView == pickerFrom) {
-            self.pickerTo.reloadAllComponents()
+            self.pickerTo.reloadComponent(0)
         }
         self.requestCurrentCurrencyRate()
     }
@@ -196,11 +184,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             DispatchQueue.main.async {
                 if let strongSelf = self {
                     
-                    let rate = Double(value.floatValue)
-                    
                     if strongSelf.textFieldFrom.text != nil,
-                        let quantity = Double(strongSelf.textFieldFrom.text!) {
-                        
+                        let rate = Double(value) {
+                        let quantity = strongSelf.textFieldFrom.text!.DoubleCommaValue
                         let ex = Exchange(context: strongSelf.managedObjectContext)
                         ex.from = baseCurrency
                         ex.to = toCurrency
@@ -283,7 +269,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         var rowFrom = self.pickerFrom.selectedRow(inComponent: 0)
         var rowTo = self.pickerTo.selectedRow(inComponent: 0)
         print("was rowFrom=\(rowFrom), rowTo=\(rowTo)")
-        if rowFrom < rowTo {
+        if rowFrom <= rowTo {
             swap(&rowFrom, &rowTo)
             rowFrom += 1
         } else {
@@ -294,6 +280,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         self.pickerFrom.selectRow(rowFrom, inComponent: 0, animated: true)
         self.pickerTo.selectRow(rowTo, inComponent: 0, animated: true)
         recountButtonPressed(self)
+        self.pickerTo.reloadComponent(0)
+
     }
     @IBAction func shareCurrencyRate(_ sender: Any) {
         let textToShare = [currentExchange.text()]

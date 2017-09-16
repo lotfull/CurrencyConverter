@@ -1,11 +1,3 @@
-//
-//  HistoryTVC.swift
-//  Currency converter
-//
-//  Created by Kam Lotfull on 15.09.17.
-//  Copyright © 2017 Andrey. All rights reserved.
-//
-
 import UIKit
 import CoreData
 

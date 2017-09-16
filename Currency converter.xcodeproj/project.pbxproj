@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		556A97D31E5B6E5400C3AE3E /* Concurrency converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Concurrency converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		556A97D31E5B6E5400C3AE3E /* Currency converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Currency converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		556A97D61E5B6E5400C3AE3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		556A97D81E5B6E5400C3AE3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		556A97DB1E5B6E5400C3AE3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		556A97D41E5B6E5400C3AE3E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				556A97D31E5B6E5400C3AE3E /* Concurrency converter.app */,
+				556A97D31E5B6E5400C3AE3E /* Currency converter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,9 +83,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		556A97D21E5B6E5400C3AE3E /* Concurrency converter */ = {
+		556A97D21E5B6E5400C3AE3E /* Currency converter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 556A97E51E5B6E5400C3AE3E /* Build configuration list for PBXNativeTarget "Concurrency converter" */;
+			buildConfigurationList = 556A97E51E5B6E5400C3AE3E /* Build configuration list for PBXNativeTarget "Currency converter" */;
 			buildPhases = (
 				556A97CF1E5B6E5400C3AE3E /* Sources */,
 				556A97D01E5B6E5400C3AE3E /* Frameworks */,
@@ -95,9 +95,9 @@
 			);
 			dependencies = (
 			);
-			name = "Concurrency converter";
+			name = "Currency converter";
 			productName = "Concurrency converter";
-			productReference = 556A97D31E5B6E5400C3AE3E /* Concurrency converter.app */;
+			productReference = 556A97D31E5B6E5400C3AE3E /* Currency converter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +108,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = Andrey;
+				ORGANIZATIONNAME = KamLotfull;
 				TargetAttributes = {
 					556A97D21E5B6E5400C3AE3E = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -130,7 +130,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				556A97D21E5B6E5400C3AE3E /* Concurrency converter */,
+				556A97D21E5B6E5400C3AE3E /* Currency converter */,
 			);
 		};
 /* End PBXProject section */
@@ -225,7 +225,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -268,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -284,7 +284,7 @@
 				INFOPLIST_FILE = "Concurrency converter/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lotfull.Concurrency-converter";
+				PRODUCT_BUNDLE_IDENTIFIER = Lotfull.CurrencyConverter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -298,7 +298,7 @@
 				INFOPLIST_FILE = "Concurrency converter/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lotfull.Concurrency-converter";
+				PRODUCT_BUNDLE_IDENTIFIER = Lotfull.CurrencyConverter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -316,7 +316,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		556A97E51E5B6E5400C3AE3E /* Build configuration list for PBXNativeTarget "Concurrency converter" */ = {
+		556A97E51E5B6E5400C3AE3E /* Build configuration list for PBXNativeTarget "Currency converter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				556A97E61E5B6E5400C3AE3E /* Debug */,

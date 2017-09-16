@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Concurrency converter
-//
-//  Created by Андрей on 20.02.17.
-//  Copyright © 2017 Andrey. All rights reserved.
-//
-
 import UIKit
 import CoreData
 

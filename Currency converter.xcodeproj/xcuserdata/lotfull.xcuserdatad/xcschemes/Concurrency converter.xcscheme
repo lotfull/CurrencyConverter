@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
-               BuildableName = "Concurrency converter.app"
-               BlueprintName = "Concurrency converter"
+               BuildableName = "Currency converter.app"
+               BlueprintName = "Currency converter"
                ReferencedContainer = "container:Currency converter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
-            BuildableName = "Concurrency converter.app"
-            BlueprintName = "Concurrency converter"
+            BuildableName = "Currency converter.app"
+            BlueprintName = "Currency converter"
             ReferencedContainer = "container:Currency converter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
-            BuildableName = "Concurrency converter.app"
-            BlueprintName = "Concurrency converter"
+            BuildableName = "Currency converter.app"
+            BlueprintName = "Currency converter"
             ReferencedContainer = "container:Currency converter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "556A97D21E5B6E5400C3AE3E"
-            BuildableName = "Concurrency converter.app"
-            BlueprintName = "Concurrency converter"
+            BuildableName = "Currency converter.app"
+            BlueprintName = "Currency converter"
             ReferencedContainer = "container:Currency converter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

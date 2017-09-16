@@ -1,11 +1,3 @@
-//
-//  Exchange+CoreDataProperties.swift
-//  Currency converter
-//
-//  Created by Kam Lotfull on 16.09.17.
-//  Copyright © 2017 Andrey. All rights reserved.
-//
-
 import Foundation
 import CoreData
 
@@ -23,6 +15,6 @@ extension Exchange {
 
     
     func text() -> String {
-        return "\(round(quantity*1000)/1000) \(from) = \(round(rate*quantity*1000)/1000) \(to)"
+        return "\(round(quantity*10000)/10000) \(from) = \(round(rate*quantity*10000)/10000) \(to)"
     }
 }
