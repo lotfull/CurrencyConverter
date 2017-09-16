@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Exchange" representedClassName="Exchange" syncable="YES">
+        <attribute name="from" attributeType="String" syncable="YES"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isHistory" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="quantity" attributeType="Double" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rate" attributeType="Double" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="to" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Exchange" positionX="-63" positionY="-18" width="128" height="135"/>
+    </elements>
+</model>

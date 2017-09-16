@@ -12,8 +12,11 @@
 		556A97DC1E5B6E5400C3AE3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556A97DA1E5B6E5400C3AE3E /* Main.storyboard */; };
 		556A97DE1E5B6E5400C3AE3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556A97DD1E5B6E5400C3AE3E /* Assets.xcassets */; };
 		556A97E11E5B6E5400C3AE3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 556A97DF1E5B6E5400C3AE3E /* LaunchScreen.storyboard */; };
-		55C2D45F1E5D060F00FBC4BC /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C2D45E1E5D060F00FBC4BC /* info_icon.png */; };
-		55C2D4611E5D064700FBC4BC /* exchange_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C2D4601E5D064700FBC4BC /* exchange_icon.png */; };
+		913C68E01F6C5DE3000B5FFC /* HistoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C68DF1F6C5DE3000B5FFC /* HistoryTVC.swift */; };
+		913C68E21F6C5E02000B5FFC /* FavoritesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913C68E11F6C5E02000B5FFC /* FavoritesTVC.swift */; };
+		915F37821F6C7DB200552292 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 915F37801F6C7DB200552292 /* Model.xcdatamodeld */; };
+		915F37851F6C803C00552292 /* Exchange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F37831F6C803C00552292 /* Exchange+CoreDataClass.swift */; };
+		915F37861F6C803C00552292 /* Exchange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F37841F6C803C00552292 /* Exchange+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +27,11 @@
 		556A97DD1E5B6E5400C3AE3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		556A97E01E5B6E5400C3AE3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		556A97E21E5B6E5400C3AE3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55C2D45E1E5D060F00FBC4BC /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
-		55C2D4601E5D064700FBC4BC /* exchange_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exchange_icon.png; sourceTree = "<group>"; };
+		913C68DF1F6C5DE3000B5FFC /* HistoryTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTVC.swift; sourceTree = "<group>"; };
+		913C68E11F6C5E02000B5FFC /* FavoritesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTVC.swift; sourceTree = "<group>"; };
+		915F37811F6C7DB200552292 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		915F37831F6C803C00552292 /* Exchange+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exchange+CoreDataClass.swift"; sourceTree = "<group>"; };
+		915F37841F6C803C00552292 /* Exchange+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exchange+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +48,7 @@
 		556A97CA1E5B6E5400C3AE3E = {
 			isa = PBXGroup;
 			children = (
-				556A97D51E5B6E5400C3AE3E /* Concurrency converter */,
+				556A97D51E5B6E5400C3AE3E /* Currency converter */,
 				556A97D41E5B6E5400C3AE3E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,27 +61,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		556A97D51E5B6E5400C3AE3E /* Concurrency converter */ = {
+		556A97D51E5B6E5400C3AE3E /* Currency converter */ = {
 			isa = PBXGroup;
 			children = (
-				55C2D4621E5D065D00FBC4BC /* Icons */,
-				556A97D61E5B6E5400C3AE3E /* AppDelegate.swift */,
+				915F37831F6C803C00552292 /* Exchange+CoreDataClass.swift */,
+				915F37841F6C803C00552292 /* Exchange+CoreDataProperties.swift */,
+				915F37801F6C7DB200552292 /* Model.xcdatamodeld */,
+				913C68DF1F6C5DE3000B5FFC /* HistoryTVC.swift */,
+				913C68E11F6C5E02000B5FFC /* FavoritesTVC.swift */,
 				556A97D81E5B6E5400C3AE3E /* ViewController.swift */,
+				556A97D61E5B6E5400C3AE3E /* AppDelegate.swift */,
 				556A97DA1E5B6E5400C3AE3E /* Main.storyboard */,
 				556A97DD1E5B6E5400C3AE3E /* Assets.xcassets */,
 				556A97DF1E5B6E5400C3AE3E /* LaunchScreen.storyboard */,
 				556A97E21E5B6E5400C3AE3E /* Info.plist */,
 			);
+			name = "Currency converter";
 			path = "Concurrency converter";
-			sourceTree = "<group>";
-		};
-		55C2D4621E5D065D00FBC4BC /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				55C2D45E1E5D060F00FBC4BC /* info_icon.png */,
-				55C2D4601E5D064700FBC4BC /* exchange_icon.png */,
-			);
-			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,7 +112,7 @@
 				TargetAttributes = {
 					556A97D21E5B6E5400C3AE3E = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 8XQZ6ZUQW4;
+						DevelopmentTeam = 754G6TU2DQ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -138,8 +140,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55C2D4611E5D064700FBC4BC /* exchange_icon.png in Resources */,
-				55C2D45F1E5D060F00FBC4BC /* info_icon.png in Resources */,
 				556A97E11E5B6E5400C3AE3E /* LaunchScreen.storyboard in Resources */,
 				556A97DE1E5B6E5400C3AE3E /* Assets.xcassets in Resources */,
 				556A97DC1E5B6E5400C3AE3E /* Main.storyboard in Resources */,
@@ -154,6 +154,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				556A97D91E5B6E5400C3AE3E /* ViewController.swift in Sources */,
+				913C68E21F6C5E02000B5FFC /* FavoritesTVC.swift in Sources */,
+				915F37861F6C803C00552292 /* Exchange+CoreDataProperties.swift in Sources */,
+				915F37851F6C803C00552292 /* Exchange+CoreDataClass.swift in Sources */,
+				915F37821F6C7DB200552292 /* Model.xcdatamodeld in Sources */,
+				913C68E01F6C5DE3000B5FFC /* HistoryTVC.swift in Sources */,
 				556A97D71E5B6E5400C3AE3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,10 +280,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8XQZ6ZUQW4;
+				DEVELOPMENT_TEAM = 754G6TU2DQ;
 				INFOPLIST_FILE = "Concurrency converter/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.aon.Currency-converter";
+				PRODUCT_BUNDLE_IDENTIFIER = "Lotfull.Concurrency-converter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -288,10 +294,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8XQZ6ZUQW4;
+				DEVELOPMENT_TEAM = 754G6TU2DQ;
 				INFOPLIST_FILE = "Concurrency converter/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.aon.Currency-converter";
+				PRODUCT_BUNDLE_IDENTIFIER = "Lotfull.Concurrency-converter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -319,6 +326,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		915F37801F6C7DB200552292 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				915F37811F6C7DB200552292 /* Model.xcdatamodel */,
+			);
+			currentVersion = 915F37811F6C7DB200552292 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 556A97CB1E5B6E5400C3AE3E /* Project object */;
 }
