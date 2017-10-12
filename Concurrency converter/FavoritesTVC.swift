@@ -8,13 +8,13 @@ protocol showFExchangeDelegate: class {
 class FavoritesTVC: UITableViewController {
 
     @IBAction func cleanFavoritesButtonPressed(_ sender: UIBarButtonItem) {
-        removeData()
-        tableView.reloadData()
+        removeFavoritesData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         firstFetching()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,7 +55,7 @@ class FavoritesTVC: UITableViewController {
         delegate?.showExchange(favoriteExchanges[favoriteExchanges.count - indexPath.row - 1])
     }
     
-    func removeData() {
+    func removeFavoritesData() {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exchange")
         let predicate = NSPredicate(format: "isFavorite == %@" ,NSNumber(booleanLiteral: true))
         fetch.predicate = predicate
@@ -67,6 +67,24 @@ class FavoritesTVC: UITableViewController {
             print ("There was an error")
         }
         favoriteExchanges = [Exchange]()
+        self.tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let exchange = favoriteExchanges[indexPath.row]
+            if exchange.isHistory == false {
+                managedObjectContext.delete(exchange)
+            } else {
+                exchange.isFavorite = false
+            }
+            favoriteExchanges.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 
     var delegate: showFExchangeDelegate?

@@ -8,7 +8,7 @@ protocol showExchangeDelegate: class {
 class HistoryTVC: UITableViewController {
 
     @IBAction func cleanHistoryButtonPressed(_ sender: UIBarButtonItem) {
-        removeData()
+        removeHistoryData()
         tableView.reloadData()
     }
     
@@ -17,7 +17,7 @@ class HistoryTVC: UITableViewController {
         firstFetching()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         firstFetching()
         tableView.reloadData()
     }
@@ -55,7 +55,7 @@ class HistoryTVC: UITableViewController {
         delegate?.showExchange(historyExchanges[historyExchanges.count - indexPath.row - 1])
     }
     
-    func removeData() {
+    func removeHistoryData() {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exchange")
         let predicate = NSPredicate(format: "isFavorite == %@" ,NSNumber(booleanLiteral: false))
         fetch.predicate = predicate
@@ -65,6 +65,15 @@ class HistoryTVC: UITableViewController {
             try managedObjectContext.save()
         } catch {
             print ("There was an error")
+        }
+        let exchangeFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exchange")
+        do {
+            tempExchanges = (try managedObjectContext.fetch(exchangeFetch) as! [Exchange])
+            for item in tempExchanges {
+                item.isHistory = false
+            }
+        } catch {
+            fatalError("Failed to fetch words: \(error)")
         }
         historyExchanges = [Exchange]()
     }

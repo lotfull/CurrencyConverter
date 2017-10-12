@@ -6,6 +6,7 @@ screenshotsForiTunes/*.png
 *.xlsx
 *.xcuserstate
 *.sketch
+images/
 /SlangApp.xcworkspace/xcuserdata/lotfull.xcuserdatad/*.xcuserstate
 # Xcode
 #

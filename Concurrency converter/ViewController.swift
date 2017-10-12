@@ -20,14 +20,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var pickerTo: UIPickerView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var textFieldFrom: UITextField!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
     
     @IBAction func addExchangeToFavorites(_ sender: UIBarButtonItem) {
-        if currentExchange.isHistory == true {
+        if !currentExchange.isFavorite {
             currentExchange.isFavorite = true
+            favoriteButton.style = .done
+            favoriteButton.title = "в избранном"
+        } else {
+            currentExchange.isFavorite = false
+            favoriteButton.style = .plain
+            favoriteButton.title = "в избранное"
         }
     }
     
-    var currencies = ["RUB","USD","EUR"]
+    var currencies = ["USD","RUB","EUR"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +69,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.pickerFrom.isHidden = false
             self.label.isHidden = false
         }
+        self.requestCurrentCurrencyRate()
         addDoneButton()
     }
 
@@ -157,7 +165,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        favoriteButton.style = .plain
+        favoriteButton.title = "в избранное"
         if (pickerView == pickerFrom) {
+            if row < pickerTo.selectedRow(inComponent: 0) {
+                pickerTo.selectRow(pickerTo.selectedRow(inComponent: 0) - 1, inComponent: 0, animated: false)
+            }
+            if row >= 2 + pickerTo.selectedRow(inComponent: 0) {
+                pickerTo.selectRow(pickerTo.selectedRow(inComponent: 0) + 1, inComponent: 0, animated: false)
+            }
             self.pickerTo.reloadComponent(0)
         }
         self.requestCurrentCurrencyRate()
@@ -247,6 +263,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func showExchange(_ ex: Exchange) {
         let rowFrom = currencies.index(of: ex.from)!
         var rowTo = currencies.index(of: ex.to)!// + currencies.index(of: ex.to)! >= rowFrom ? -1 : 0
+        if !ex.isFavorite {
+            favoriteButton.style = .done
+            favoriteButton.title = "в избранном"
+        } else {
+            favoriteButton.style = .plain
+            favoriteButton.title = "в избранное"
+        }
         rowTo -= rowFrom < rowTo ? 1 : 0
         self.pickerFrom.selectRow(rowFrom, inComponent: 0, animated: true)
         self.pickerTo.selectRow(rowTo, inComponent: 0, animated: true)
